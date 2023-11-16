@@ -30,6 +30,24 @@ app.get('/api/persons', (request, response) => {
   response.json(phonebook);
 });
 
+app.get('/info', (request, response) => {
+  const dateOptions = {
+    weekday: 'short',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    timeZoneName: 'long'
+  }
+  const responseText = 
+  `<p>Phonebook has info for ${phonebook.length} people.</p>
+  ${new Date().toLocaleDateString("en-US", dateOptions)}`  
+
+  response.end(responseText);
+});
+
 const PORT = 3001;
 
 app.listen(PORT, () => {
