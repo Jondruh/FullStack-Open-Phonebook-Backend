@@ -26,7 +26,7 @@ let phonebook = [
   }
 ]
 
-app.get('/api/phonebook', (request, response) => {
+app.get('/api/persons', (request, response) => {
   response.json(phonebook);
 });
 
