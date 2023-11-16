@@ -2,13 +2,20 @@ DELETE http://localhost:3001/api/persons/2
 
 ###
 
-POST http://localhost:3001/api/notes 
+POST http://localhost:3001/api/persons 
 content-type: application/json
 
 {
-  "content": "REST Client is good at testing backends",
-  "important": true
+  "name": "Jonathan Smith",
+  "number": 123456789
 }
 
+###
+POST http://localhost:3001/api/persons 
+content-type: application/json
+
+{
+  "number": 123456789
+}
 ###
 GET http://localhost:3001/api/persons  
