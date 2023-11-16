@@ -1,17 +1,15 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
+
+morgan.token('body', (req, res) => {
+  if (Object.keys(req.body).length !== 0) {
+    return JSON.stringify(req.body);
+  }
+});
 
 app.use(express.json());
-
-const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:  ', request.path)
-  console.log('Body:  ', request.body)
-  console.log('---')
-  next()
-}
-
-app.use(requestLogger);
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 let persons = [
   { 
@@ -105,13 +103,6 @@ app.get('/info', (request, response) => {
 
   response.end(responseText);
 });
-
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
-
-app.use(unknownEndpoint)
-
 
 const PORT = 3001;
 
